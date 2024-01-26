@@ -11,10 +11,14 @@ class Project extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $fillable = ['title', 'description', 'slug'];
+    protected $fillable = ['title', 'description', 'slug', 'type_id'];
     
     public function setTitleAttribute($_title) {
         $this->attributes['title'] = $_title;
         $this->attributes['slug'] = Str::slug($_title); 
+    }
+
+    public function Type(){
+        return $this->belongsTo(Type::class);
     }
 }
