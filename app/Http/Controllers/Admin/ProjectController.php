@@ -45,7 +45,8 @@ class ProjectController extends Controller
         $form_data = $request->validated();
         $project = new Project ();
         $project->fill($form_data);
-        dd($request->all(), $form_data, $project);
+        $project->type_id = $request->type_id;
+        // dd($request->all(), $form_data, $project);
         // $project->slug = Str::slug ($project->title, '-');
         $project->save();
         return redirect()->route('admin.projects.show', ['project' => $project->slug]);
@@ -70,7 +71,8 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', compact('project'));
+        $types = Type::all();
+        return view('admin.projects.edit', compact('project','types'));
     }
 
     /**
@@ -84,6 +86,7 @@ class ProjectController extends Controller
     {
         $form_data = $request->validated();
         $project->update($form_data);
+        
         return redirect()->route('admin.projects.show',['project'=>$project->slug]);
     }
 
