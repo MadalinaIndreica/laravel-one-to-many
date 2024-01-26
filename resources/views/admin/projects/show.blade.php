@@ -3,9 +3,12 @@
 @section('content')
     <div class="container mt-5">
         <h2>{{ $project->title }}</h2>
-        <p>
-           categoria: {{ $project->type ? $project->type->name : 'nessuna categoria' }}
-        </p>
+        <div>
+            <p>
+           tipologia: {{ $project->type ? $project->type->name : 'nessuna tipologia' }}
+            </p>
+        </div>
+        
         <div class="mt-4">
             Data: {{ $project->created_at }}
         </div>

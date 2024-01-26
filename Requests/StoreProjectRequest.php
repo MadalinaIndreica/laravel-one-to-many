@@ -25,7 +25,8 @@ class StoreProjectRequest extends FormRequest
     {
         return [
             'title' => ['required', 'max:200', 'min:5', 'unique:projects'],
-            'description' => ['nullable']
+            'description' => ['nullable'],
+            'type_id' => 'nullable'
         ];
     }
     public function messages()
@@ -35,6 +36,7 @@ class StoreProjectRequest extends FormRequest
             'title.required' => 'Il titolo è obbligatorio',
             'title.min' => 'Il titolo deve essere lungo almeno :min caratteri',
             'title.max' =>'Il titolo deve essere lungo massimo :max caratteri',
+            
         ];
        
     }

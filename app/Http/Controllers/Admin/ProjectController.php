@@ -7,6 +7,7 @@ use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Models\Type;
 use Illuminate\Support\Str;
 
 class ProjectController extends Controller
@@ -29,7 +30,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('admin.projects.create');
+        $types = Type::all();
+        return view('admin.projects.create', compact('types'));
     }
 
     /**
@@ -43,7 +45,8 @@ class ProjectController extends Controller
         $form_data = $request->validated();
         $project = new Project ();
         $project->fill($form_data);
-        $project->slug = Str::slug ($project->title, '-');
+        dd($request->all(), $form_data, $project);
+        // $project->slug = Str::slug ($project->title, '-');
         $project->save();
         return redirect()->route('admin.projects.show', ['project' => $project->slug]);
     }
